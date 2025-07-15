@@ -42,16 +42,29 @@ def busqueda_precio():
     while True:
         try:
             p_min = int(input('Ingrese el precio mínimo: '))
-            p_max = int(input('Ingrese el precio máximo: '))    
+            p_max = int(input('Ingrese el precio máximo: '))
+                
             if p_min < 249990:
                 print('No hay notebooks en ese rango de precio')
             elif p_max > 749990:
-                print('No hay notebooks en ese rango de precio')  
-            print(f'Los de noteboos entre los precios consultas son: ')            
+                print('No hay notebooks en ese rango de precio')
+            else:
+                for clave, valor in stock.items():
+                    precio = valor[0]
+
+                    if p_min <= precio <= p_max:
+                        if clave in productos:
+                            print('Los de noteboos entre los precios consultas son:')
+                            detalles_producto = productos[clave]
+                            marca = detalles_producto[0]
+                            almacenamiento = detalles_producto[4]
+                            print(f'Modelo: {clave} || Almacenamiento: {almacenamiento}')                         
         except ValueError:
             print('Debe ingresar valores enteros!!')
 
+
 #marca - modelo - ram - GB de DD
+
 def ordenar_productos():
     print('------Listado de Notebooks Ordenados------')
     for clave, valor in productos.items():        
