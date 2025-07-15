@@ -49,16 +49,27 @@ def busqueda_precio():
             elif p_max > 749990:
                 print('No hay notebooks en ese rango de precio')
             else:
+                modelos_encontrados = []
                 for clave, valor in stock.items():
                     precio = valor[0]
 
                     if p_min <= precio <= p_max:
-                        if clave in productos:
-                            print('Los de noteboos entre los precios consultas son:')
+                        if clave in productos:                            
                             detalles_producto = productos[clave]
                             marca = detalles_producto[0]
                             almacenamiento = detalles_producto[4]
-                            print(f'Modelo: {clave} || Almacenamiento: {almacenamiento}')                         
+                            modelos_encontrados.append(f'Modelo: {clave} || Almacenamiento: {almacenamiento}')
+                        else:
+                            modelos_encontrados.append(f'Modelo: {clave} || Detalles no disponibles.')
+
+                if modelos_encontrados:
+                    for linea_modelo in modelos_encontrados:
+                        print('Los de noteboos entre los precios consultas son:')
+                        print(linea_modelo)
+                        break
+                else:
+                    print('No se encontraron modelos en ese rango de precios.')
+                    break
         except ValueError:
             print('Debe ingresar valores enteros!!')
 
