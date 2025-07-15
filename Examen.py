@@ -25,17 +25,18 @@ def menu():
     print('4. Salir.')
 
 def stock_marca():
-    modelo = ''
-    cant = {}
-    marca = input('Ingrese marca a consultar: ').title() #no pude sumar ni ingresar HP
-    for clave, valor in productos.items():
-        if marca == valor[0]:
-            modelo = clave
-            for clave, valor in stock.items():
-                if modelo == clave:
-                    cant[clave] = stock[clave]
-                    total = 0 + valor[1]
-                    print(f'El stock es: {total}')
+    modelo = []    
+    total = 0
+    marca = input('Ingrese marca a consultar: ')
+
+    for clave, valor in productos.items():  
+        if marca == valor[0]:  
+            modelo.append(clave)
+    for modelo_actual in modelo:
+        if modelo_actual in stock:
+            precio, cantidad = stock[modelo_actual]
+            total += cantidad
+    print(f'El stock es: {total}')
 
 def busqueda_precio():
     while True:
